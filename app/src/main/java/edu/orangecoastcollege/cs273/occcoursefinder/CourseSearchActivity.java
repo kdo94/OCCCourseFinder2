@@ -30,6 +30,7 @@ public class CourseSearchActivity extends AppCompatActivity {
     private OfferingListAdapter offeringListAdapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class CourseSearchActivity extends AppCompatActivity {
 
         instructorSpinner = (Spinner) findViewById(R.id.instructorSpinner);
         ArrayAdapter<String> instructorSpinnerAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item, getAllInstructornames());
+                (this, android.R.layout.simple_spinner_item, getAllInstructorNames());
         instructorSpinner.setAdapter(instructorSpinnerAdapter);
         instructorSpinner.setOnItemSelectedListener(instructorSpinnerListener);
 
@@ -60,7 +61,6 @@ public class CourseSearchActivity extends AppCompatActivity {
         offeringListAdapter =
                 new OfferingListAdapter(this, R.layout.offering_list_item, filteredOfferingsList);
         offeringsListView.setAdapter(offeringListAdapter);
-
 
 
         // How you would go through a database to populate a spinner
@@ -77,7 +77,7 @@ public class CourseSearchActivity extends AppCompatActivity {
         */
     }
 
-    private String[] getAllInstructornames(){
+    private String[] getAllInstructorNames(){
         String[] instructorNames = new String[allInstructorsList.size() + 1];
         instructorNames[0] = "[Select Instructor]";
         for(int i = 1; i < instructorNames.length; i++){
@@ -102,6 +102,8 @@ public class CourseSearchActivity extends AppCompatActivity {
                     offeringListAdapter.add(offering);
             }
             else{
+                String name = instructorSpinner.getSelectedItem().toString();
+                //Toast.makeText(CourseSearchActivity.this, name, Toast.LENGTH_SHORT).show();
                 offeringListAdapter.clear();
                 for (Offering offering : allOfferingsList){
                     // If the course title starts with the user input,
